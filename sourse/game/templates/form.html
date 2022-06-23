@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+<a href="history/">История игры</a>
      <p>Guess 4 numbers. Enter them separated with spaces:</p>
         <form method="POST" action="/">
             {% csrf_token %}
@@ -14,6 +15,7 @@
             <input type="submit" value="Send"/>
         </form>
 
+{{ secret_numbers }}
 <h2>{{ result }}</h2>
 </body>
 </html>

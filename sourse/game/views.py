@@ -3,6 +3,9 @@ from django.shortcuts import render
 from game.functions import Game
 
 # Create your views here.
+
+history_list = []
+
 def index_view(request):
     if request.method == "POST":
         numbers_str = request.POST.get("numbers")
@@ -13,9 +16,8 @@ def index_view(request):
             result = error
         else:
             result = game.results()
-
-        return render(request, "form.html", {"result": result})
-
+            history_list.append(f"введены следующие цифры {numbers_str}, а вот результат: {result}")
+        return render(request, "form.html", {"result": result, "nums": numbers_str, "secret_numbers": game.secret_numbers})
     else:
         return render(request, "form.html",)
 
@@ -23,4 +25,4 @@ def index_view(request):
 
 
 def history_stat(request):
-    pass
+    return render(request, "history.html", {"history_list": history_list})
